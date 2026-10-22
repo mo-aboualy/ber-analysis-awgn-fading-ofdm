@@ -128,11 +128,11 @@ Running the script produces nine figures:
 
 A formatted table of all simulated BER values is also printed to the Command Window.
 
-<!-- After running the script, export the figures into results/part1/ and uncomment:
+<!-- After running the script, export the figures into part1-awgn/figures/ and uncomment:
 
-![All schemes](results/part1/fig5_all_schemes.png)
-![QPSK Gray vs non-Gray](results/part1/fig6_qpsk_gray_vs_nongray.png)
-![BFSK PSD](results/part1/fig8_bfsk_psd.png)
+![All schemes](part1-awgn/figures/fig5_all_schemes.png)
+![QPSK Gray vs non-Gray](part1-awgn/figures/fig6_qpsk_gray_vs_nongray.png)
+![BFSK PSD](part1-awgn/figures/fig8_bfsk_psd.png)
 -->
 
 ## Key observations
@@ -208,7 +208,7 @@ Required output: BER vs. SNR for BPSK and 16-QAM, for both channels, with and wi
 **Run Part 1**
 
 ```matlab
-cd part1
+cd part1-awgn
 Part_1
 ```
 
@@ -229,15 +229,14 @@ Suggested layout:
 ```
 ber-analysis-awgn-fading-ofdm/
 ├── README.md
-├── part1/                  # Single carrier over AWGN
-│   └── Part_1.m
-├── part2/                  # Rayleigh flat fading
-├── part3/                  # OFDM
-├── docs/                   # Assignment PDFs, reports
-└── results/
-    ├── part1/              # Exported figures
-    ├── part2/
-    └── part3/
+├── part1-awgn/                    # Single carrier over AWGN
+│   ├── Part_1.m
+│   └── figures/
+├── part2-rayleigh-flat-fading/    # Rayleigh flat fading
+│   └── figures/
+├── part3-ofdm/                    # OFDM
+│   └── figures/
+└── docs/                          # Assignment PDFs, reports
 ```
 
 ## Team
