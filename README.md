@@ -71,16 +71,16 @@ This keeps the comparison across modulation orders fair, since $E_b$, not $E_s$,
 
 ## Theoretical references
 
-Simulated points are overlaid on these expressions, with $Q(x) = \frac{1}{2}\operatorname{erfc}\left(x/\sqrt{2}\right)$:
+Simulated points are overlaid on these expressions, with $Q(x) = \frac{1}{2}\mathrm{erfc}\left(x/\sqrt{2}\right)$:
 
 | Scheme | Theoretical BER | Type |
 |--------|-----------------|------|
-| BPSK | $\frac{1}{2}\operatorname{erfc}\left(\sqrt{E_b/N_0}\right)$ | exact |
-| QPSK, Gray | $\frac{1}{2}\operatorname{erfc}\left(\sqrt{E_b/N_0}\right)$ | exact |
-| QPSK, non-Gray | $\frac{3}{2}p - p^2,\quad p = \frac{1}{2}\operatorname{erfc}\left(\sqrt{E_b/N_0}\right)$ | exact |
-| 8PSK, Gray | $\frac{1}{3}\operatorname{erfc}\left(\sqrt{3E_b/N_0}\,\sin\frac{\pi}{8}\right)$ | tight approximation |
-| 16-QAM, Gray | $\frac{3}{8}\operatorname{erfc}\left(\sqrt{\frac{2}{5}\,E_b/N_0}\right)$ | tight approximation |
-| BFSK, coherent orthogonal | $\frac{1}{2}\operatorname{erfc}\left(\sqrt{\frac{E_b}{2N_0}}\right)$ | exact |
+| BPSK | $\frac{1}{2}\mathrm{erfc}\left(\sqrt{E_b/N_0}\right)$ | exact |
+| QPSK, Gray | $\frac{1}{2}\mathrm{erfc}\left(\sqrt{E_b/N_0}\right)$ | exact |
+| QPSK, non-Gray | $\frac{3}{2}p - p^2,\quad p = \frac{1}{2}\mathrm{erfc}\left(\sqrt{E_b/N_0}\right)$ | exact |
+| 8PSK, Gray | $\frac{1}{3}\mathrm{erfc}\left(\sqrt{3E_b/N_0}\,\sin\frac{\pi}{8}\right)$ | tight approximation |
+| 16-QAM, Gray | $\frac{3}{8}\mathrm{erfc}\left(\sqrt{\frac{2}{5}\,E_b/N_0}\right)$ | tight approximation |
+| BFSK, coherent orthogonal | $\frac{1}{2}\mathrm{erfc}\left(\sqrt{\frac{E_b}{2N_0}}\right)$ | exact |
 
 **Why non-Gray QPSK is worse.** In Fig. 3, a decision error on the $I$ axis flips both bits (because $b_1$ depends on $I$), while an error on $Q$ alone flips one bit, and errors on both axes flip one bit net. Averaging over the two bits gives $\frac{3}{2}p - p^2$, which is about $1.5\times$ the Gray-coded BER at high SNR. Gray mapping ensures nearest-neighbour symbol errors cost exactly one bit error.
 
@@ -192,8 +192,8 @@ After inversion the noise on each real axis has variance $\frac{N_0}{2\lvert h_k
 
 | Scheme | Bits/symbol | Mapping | $E_s$ | $E_b$ | Hard decision on $\tilde{y}$ |
 |--------|:-----------:|---------|:-----:|:-----:|------------------------------|
-| BPSK | 1 | $0 \to -\sqrt{E_b},\ 1 \to +\sqrt{E_b}$ | 1 | 1 | $\hat{b} = \mathbb{1}\left[\operatorname{Re}\tilde{y} > 0\right]$ |
-| QPSK | 2 | $b_0 \to I,\ b_1 \to Q$, each $\lbrace 0, 1 \rbrace \to \lbrace -1, +1 \rbrace$ | 2 | 1 | independent sign decisions on $\operatorname{Re}\tilde{y}$ and $\operatorname{Im}\tilde{y}$ |
+| BPSK | 1 | $0 \to -\sqrt{E_b},\ 1 \to +\sqrt{E_b}$ | 1 | 1 | $\hat{b} = \mathbb{1}\left[\mathrm{Re}\tilde{y} > 0\right]$ |
+| QPSK | 2 | $b_0 \to I,\ b_1 \to Q$, each $\lbrace 0, 1 \rbrace \to \lbrace -1, +1 \rbrace$ | 2 | 1 | independent sign decisions on $\mathrm{Re}\tilde{y}$ and $\mathrm{Im}\tilde{y}$ |
 | 16-QAM, Gray | 4 | $b_0 b_1 \to I,\ b_2 b_3 \to Q$, each $\lbrace 00, 01, 11, 10 \rbrace \to \lbrace -3, -1, +1, +3 \rbrace$ | 10 | 2.5 | per axis: sign gives $b_0$ (or $b_2$), $\lvert\cdot\rvert < 2$ gives $b_1$ (or $b_3$) |
 
 QPSK and 16-QAM follow the constellations given in the assignment. The 16-QAM thresholds are at $0$ and $\pm 2$, the midpoints between adjacent levels.
@@ -255,7 +255,7 @@ Applying the identity above with $c = 0.8\gamma k^2$ for $k = 1, 3, 5$ yields th
 
 </details>
 
-The AWGN reference curves overlaid in the comparison figures are the Part 1 expressions: $\frac{1}{2}\operatorname{erfc}\left(\sqrt{\gamma}\right)$ for BPSK and QPSK, and $\frac{3}{8}\operatorname{erfc}\left(\sqrt{\frac{2}{5}\gamma}\right)$ for 16-QAM.
+The AWGN reference curves overlaid in the comparison figures are the Part 1 expressions: $\frac{1}{2}\mathrm{erfc}\left(\sqrt{\gamma}\right)$ for BPSK and QPSK, and $\frac{3}{8}\mathrm{erfc}\left(\sqrt{\frac{2}{5}\gamma}\right)$ for 16-QAM.
 
 **Theoretical Rayleigh BER at selected points**
 
