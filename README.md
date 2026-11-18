@@ -5,8 +5,8 @@
 Digital Communications · 3rd Year · Electronics & Communications Dept. · Faculty of Engineering, Cairo University
 
 ![MATLAB](https://img.shields.io/badge/MATLAB-R2019b%2B-orange)
-![Toolbox](https://img.shields.io/badge/requires-Signal%20Processing%20Toolbox-blue)
-![Status](https://img.shields.io/badge/status-Part%201%20done%20%7C%20Parts%202--3%20in%20progress-yellow)
+![Toolbox](https://img.shields.io/badge/Part%201%20requires-Signal%20Processing%20Toolbox-blue)
+![Status](https://img.shields.io/badge/status-Parts%201%E2%80%932%20done%20%7C%20Part%203%20in%20progress-yellow)
 
 ---
 
@@ -17,7 +17,7 @@ This repository is a three-part simulation project that builds a digital communi
 | Part | Topic | Channel | Status |
 |------|-------|---------|--------|
 | **1** | Single-carrier system: BPSK, QPSK (Gray and non-Gray), 8PSK, 16-QAM, BFSK, plus BFSK PSD | AWGN | Done |
-| **2** | BER of BPSK, QPSK and 16-QAM | Rayleigh flat fading, channel known at the receiver | In progress |
+| **2** | BER of BPSK, QPSK and 16-QAM with channel inversion at the receiver | Rayleigh flat fading, channel known at the receiver | Done |
 | **3** | OFDM transceiver: coding, interleaver, mapper, 256-point IFFT, cyclic extension | Rayleigh flat fading and frequency-selective fading | In progress |
 
 > **Deadline:** all parts due 14 Dec 2026, 11:59 PM.
@@ -27,11 +27,10 @@ This repository is a three-part simulation project that builds a digital communi
 ## Table of Contents
 
 1. [Part 1: Single-Carrier System](#part-1-single-carrier-system)
-2. [Part 2: Rayleigh Flat Fading](#part-2-rayleigh-flat-fading) *(to be continued)*
+2. [Part 2: Rayleigh Flat Fading](#part-2-rayleigh-flat-fading)
 3. [Part 3: OFDM System](#part-3-ofdm-system) *(to be continued)*
 4. [Getting Started](#getting-started)
 5. [Repository Structure](#repository-structure)
-6. [Team](#team)
 
 ---
 
@@ -56,8 +55,8 @@ flowchart LR
 | QPSK, Gray (Fig. 2) | 2 | $b_0 \to I,\ b_1 \to Q$ | 2 | 1 | independent sign decisions on $I$ and $Q$ |
 | QPSK, non-Gray (Fig. 3) | 2 | $I = b_0,\ Q = b_0 \oplus b_1$ | 2 | 1 | sign decisions, then $b_1 = \hat I \oplus \hat Q$ |
 | 8PSK | 3 | unit circle, phases from the Fig. 2 constellation | 1 | 1/3 | minimum Euclidean distance (ML) |
-| 16-QAM, Gray | 4 | $\{00,01,11,10\} \to \{-3,-1,+1,+3\}$ per axis | 10 | 2.5 | per-axis thresholds at $0$ and $\pm 2$ (ML) |
-| BFSK | 1 | orthonormal basis, $0 \to [\sqrt{E_b},0],\ 1 \to [0,\sqrt{E_b}]$ | 1 | 1 | correlator comparison $r_2 > r_1$ |
+| 16-QAM, Gray | 4 | $\lbrace 00, 01, 11, 10 \rbrace \to \lbrace -3, -1, +1, +3 \rbrace$ per axis | 10 | 2.5 | per-axis thresholds at $0$ and $\pm 2$ (ML) |
+| BFSK | 1 | orthonormal basis, $0 \to [\sqrt{E_b}, 0],\ 1 \to [0, \sqrt{E_b}]$ | 1 | 1 | correlator comparison $r_2 > r_1$ |
 
 ### Noise scaling
 
@@ -65,25 +64,25 @@ For every scheme the noise power is set from the target $E_b/N_0$ using that sch
 
 $$
 N_0 = \frac{E_b}{E_b/N_0}, \qquad
-n \sim \mathcal{N}\!\left(0, \tfrac{N_0}{2}\right) \text{ per real dimension}
+n \sim \mathcal{N}\left(0, \frac{N_0}{2}\right) \text{ per real dimension}
 $$
 
 This keeps the comparison across modulation orders fair, since $E_b$, not $E_s$, is the common reference.
 
 ## Theoretical references
 
-Simulated points are overlaid on these expressions, with $Q(x) = \tfrac{1}{2}\,\mathrm{erfc}\!\left(x/\sqrt{2}\right)$:
+Simulated points are overlaid on these expressions, with $Q(x) = \frac{1}{2}\mathrm{erfc}\left(x/\sqrt{2}\right)$:
 
 | Scheme | Theoretical BER | Type |
 |--------|-----------------|------|
-| BPSK | $\tfrac{1}{2}\,\mathrm{erfc}\!\left(\sqrt{E_b/N_0}\right)$ | exact |
-| QPSK, Gray | $\tfrac{1}{2}\,\mathrm{erfc}\!\left(\sqrt{E_b/N_0}\right)$ | exact |
-| QPSK, non-Gray | $\tfrac{3}{2}p - p^2,\quad p = \tfrac{1}{2}\,\mathrm{erfc}\!\left(\sqrt{E_b/N_0}\right)$ | exact |
-| 8PSK, Gray | $\tfrac{1}{3}\,\mathrm{erfc}\!\left(\sqrt{3E_b/N_0}\,\sin\tfrac{\pi}{8}\right)$ | tight approximation |
-| 16-QAM, Gray | $\tfrac{3}{8}\,\mathrm{erfc}\!\left(\sqrt{\tfrac{2}{5}\,E_b/N_0}\right)$ | tight approximation |
-| BFSK, coherent orthogonal | $\tfrac{1}{2}\,\mathrm{erfc}\!\left(\sqrt{\tfrac{E_b}{2N_0}}\right)$ | exact |
+| BPSK | $\frac{1}{2}\mathrm{erfc}\left(\sqrt{E_b/N_0}\right)$ | exact |
+| QPSK, Gray | $\frac{1}{2}\mathrm{erfc}\left(\sqrt{E_b/N_0}\right)$ | exact |
+| QPSK, non-Gray | $\frac{3}{2}p - p^2,\quad p = \frac{1}{2}\mathrm{erfc}\left(\sqrt{E_b/N_0}\right)$ | exact |
+| 8PSK, Gray | $\frac{1}{3}\mathrm{erfc}\left(\sqrt{3E_b/N_0}\,\sin\frac{\pi}{8}\right)$ | tight approximation |
+| 16-QAM, Gray | $\frac{3}{8}\mathrm{erfc}\left(\sqrt{\frac{2}{5}\,E_b/N_0}\right)$ | tight approximation |
+| BFSK, coherent orthogonal | $\frac{1}{2}\mathrm{erfc}\left(\sqrt{\frac{E_b}{2N_0}}\right)$ | exact |
 
-**Why non-Gray QPSK is worse.** In Fig. 3, a decision error on the $I$ axis flips both bits (because $b_1$ depends on $I$), while an error on $Q$ alone flips one bit, and errors on both axes flip one bit net. Averaging over the two bits gives $\tfrac{3}{2}p - p^2$, which is about $1.5\times$ the Gray-coded BER at high SNR. Gray mapping ensures nearest-neighbour symbol errors cost exactly one bit error.
+**Why non-Gray QPSK is worse.** In Fig. 3, a decision error on the $I$ axis flips both bits (because $b_1$ depends on $I$), while an error on $Q$ alone flips one bit, and errors on both axes flip one bit net. Averaging over the two bits gives $\frac{3}{2}p - p^2$, which is about $1.5\times$ the Gray-coded BER at high SNR. Gray mapping ensures nearest-neighbour symbol errors cost exactly one bit error.
 
 ## BFSK (Task 1.5)
 
@@ -139,7 +138,7 @@ A formatted table of all simulated BER values is also printed to the Command Win
 
 - **BPSK and Gray QPSK overlap exactly** on a BER vs. $E_b/N_0$ plot: QPSK is two independent BPSK streams on orthogonal axes with the same energy per bit.
 - **Higher-order schemes pay for spectral efficiency.** At equal $E_b/N_0$, BER increases from BPSK/QPSK to 8PSK to 16-QAM, since more points are packed into the same energy budget.
-- **Mapping matters.** The non-Gray QPSK curve sits above the Gray one, with the gap predicted by $\tfrac{3}{2}p - p^2$.
+- **Mapping matters.** The non-Gray QPSK curve sits above the Gray one, with the gap predicted by $\frac{3}{2}p - p^2$.
 - **BFSK is 3 dB behind BPSK**, as theory predicts for orthogonal signalling.
 - **Simulation tracks theory** within Monte Carlo error. The 8PSK and 16-QAM references are tight approximations, so small deviations at low SNR are expected.
 
@@ -152,24 +151,160 @@ A formatted table of all simulated BER values is also printed to the Command Win
 
 # Part 2: Rayleigh Flat Fading
 
-*To be continued.*
+Part 2 replaces the AWGN-only channel of Part 1 with a **Rayleigh flat-fading channel** and measures the BER of **BPSK, QPSK and 16-QAM** when the receiver has **perfect knowledge of the channel** and compensates for it by channel inversion.
 
-**Scope:** BER of BPSK, QPSK and 16-QAM over a Rayleigh flat fading channel with perfect channel knowledge at the receiver.
+```mermaid
+flowchart LR
+    A[Random bits] --> B[Mapper]
+    B --> C["Multiply by h (Rayleigh)"]
+    C --> D["Add n (AWGN)"]
+    D --> E[Channel inversion]
+    E --> F[Hard-decision demapper]
+    F --> G[BER calculator]
+    A -.-> G
+```
 
-System model:
+## System model
+
+Each transmitted symbol $x_k$ is scaled and rotated by an independent complex channel coefficient $h_k$ and corrupted by complex noise $n_k$:
 
 $$
-y_k = (h_r + j h_i)_k\, x_k + (n_c + j n_s)_k, \qquad h_r,\, h_i \sim \mathcal{N}\!\left(0, \tfrac{1}{2}\right)
+y_k = (h_r + j h_i)_k \, x_k + (n_c + j n_s)_k
 $$
 
-The receiver compensates for the channel gain, correlates, and makes a hard decision.
+| Quantity | Distribution | Meaning |
+|----------|--------------|---------|
+| $h_r,\ h_i$ | $\mathcal{N}\left(0, \frac{1}{2}\right)$, independent | $h = A_h e^{j\theta_h}$ with Rayleigh amplitude $A_h$ and uniform phase $\theta_h \in [0, 2\pi)$ |
+| $n_c,\ n_s$ | $\mathcal{N}\left(0, \frac{N_0}{2}\right)$, independent | complex AWGN |
+| $\mathbb{E}\left[\lvert h \rvert^2\right]$ | $1$ | average channel power gain is normalized, so $E_b/N_0$ is the **average** SNR per bit |
 
-| Item | Status |
-|------|--------|
-| BPSK over Rayleigh | ☐ |
-| QPSK over Rayleigh | ☐ |
-| 16-QAM over Rayleigh | ☐ |
-| Comparison vs. AWGN results from Part 1 | ☐ |
+**Receiver (channel known).** The received sample is divided by the channel coefficient and a hard decision with threshold 0 is taken:
+
+$$
+\tilde{y}_k = \frac{y_k}{h_k} = x_k + \frac{n_k}{h_k}
+$$
+
+After inversion the noise on each real axis has variance $\frac{N_0}{2\lvert h_k \rvert^2}$, so a deep fade (small $\lvert h_k \rvert$) amplifies the noise. This noise enhancement, not the average noise level, is what dominates the error rate over fading channels.
+
+**Noise scaling** follows Part 1: $N_0 = E_b / (E_b/N_0)$ using each scheme's own $E_b$.
+
+## What is implemented
+
+| Scheme | Bits/symbol | Mapping | $E_s$ | $E_b$ | Hard decision on $\tilde{y}$ |
+|--------|:-----------:|---------|:-----:|:-----:|------------------------------|
+| BPSK | 1 | $0 \to -\sqrt{E_b},\ 1 \to +\sqrt{E_b}$ | 1 | 1 | $\hat{b} = \mathbb{1}\left[\mathrm{Re}\tilde{y} > 0\right]$ |
+| QPSK | 2 | $b_0 \to I,\ b_1 \to Q$, each $\lbrace 0, 1 \rbrace \to \lbrace -1, +1 \rbrace$ | 2 | 1 | independent sign decisions on $\mathrm{Re}\tilde{y}$ and $\mathrm{Im}\tilde{y}$ |
+| 16-QAM, Gray | 4 | $b_0 b_1 \to I,\ b_2 b_3 \to Q$, each $\lbrace 00, 01, 11, 10 \rbrace \to \lbrace -3, -1, +1, +3 \rbrace$ | 10 | 2.5 | per axis: sign gives $b_0$ (or $b_2$), $\lvert\cdot\rvert < 2$ gives $b_1$ (or $b_3$) |
+
+QPSK and 16-QAM follow the constellations given in the assignment. The 16-QAM thresholds are at $0$ and $\pm 2$, the midpoints between adjacent levels.
+
+## Simulation procedure
+
+The code follows steps (a) to (h) of the assignment for every modulation:
+
+| Step | Description | Implementation |
+|:----:|-------------|----------------|
+| a | random bit stream | `randi([0 1], 1, N_bits)`, shared by all three schemes |
+| b | symbol mapping | polar NRZ (BPSK), I/Q pairs (QPSK), Gray levels (16-QAM) |
+| c | channel and noise vectors | $h_r, h_i \sim \mathcal{N}(0, 1/2)$ and $n_c, n_s \sim \mathcal{N}(0, N_0/2)$, new draws for every symbol and every SNR point |
+| d | received symbols | `y = h .* x + n` |
+| e | channel compensation and decision | `y ./ h`, then thresholding (see the table above) |
+| f | BER | `sum(b ~= b_hat) / N_bits` |
+| g | sweep the noise level | loop over $E_b/N_0$ |
+| h | plot BER vs. SNR | `semilogy`, one figure per scheme plus comparisons |
+
+The channel, noise generation and inversion steps are shared by the three schemes, so they are written once in a helper function (`pass_through_rayleigh_channel`).
+
+| Parameter | Value | Note |
+|-----------|-------|------|
+| Bits per $E_b/N_0$ point | $10^6$ | divisible by 1, 2 and 4 bits/symbol with no padding |
+| $E_b/N_0$ range | $0$ to $30$ dB, 2 dB steps | wider than Part 1 because fading needs much more SNR |
+| Fading | independent $h_k$ for every symbol | i.i.d. flat fading (ideal interleaving); the average BER matches the closed forms below |
+| Random seed | not fixed | curves vary slightly between runs, within Monte Carlo error |
+
+## Theoretical references
+
+Averaging the AWGN error probability over the exponential distribution of $\lvert h \rvert^2$ uses the identity
+
+$$
+\mathbb{E}\left[Q\left(\sqrt{c\,\lvert h \rvert^2}\right)\right] = \frac{1}{2}\left(1 - \sqrt{\frac{c}{2 + c}}\right), \qquad \lvert h \rvert^2 \sim \text{Exp}(1)
+$$
+
+Writing $\gamma = E_b/N_0$ for the average SNR per bit:
+
+| Scheme | BER over Rayleigh fading (coherent, channel known) | High-SNR behaviour |
+|--------|-----------------------------------------------------|--------------------|
+| BPSK and QPSK | $\displaystyle \frac{1}{2}\left(1 - \sqrt{\frac{\gamma}{1+\gamma}}\right)$ | $\approx \dfrac{1}{4\gamma}$ |
+| 16-QAM, Gray | $\displaystyle \frac{1}{8}\left[4 - 3\sqrt{\frac{0.4\gamma}{1+0.4\gamma}} - 2\sqrt{\frac{3.6\gamma}{1+3.6\gamma}} + \sqrt{\frac{10\gamma}{1+10\gamma}}\right]$ | $\approx \dfrac{0.497}{\gamma}$ |
+
+<details>
+<summary>Derivation of the 16-QAM expression</summary>
+
+With Gray mapping, 16-QAM is two independent 4-PAM streams with levels $\pm 1, \pm 3$ on $I$ and $Q$. For a fixed $\lvert h \rvert^2$ the equalized noise per axis has variance $\frac{N_0}{2\lvert h \rvert^2}$. Let $a = \sqrt{2\lvert h \rvert^2 / N_0}$ and recall $N_0 = 2.5/\gamma$, so $a^2 = 0.8\,\gamma\,\lvert h \rvert^2$.
+
+- Sign bit ($b_0$): error probability $\frac{1}{2}\left[Q(a) + Q(3a)\right]$.
+- Magnitude bit ($b_1$): error probability $\frac{1}{2}\left[2Q(a) + Q(3a) - Q(5a)\right]$.
+
+Averaging the two bits gives the conditional BER
+
+$$
+P_b(\lvert h \rvert^2) = \frac{1}{4}\left[3Q(a) + 2Q(3a) - Q(5a)\right]
+$$
+
+Applying the identity above with $c = 0.8\gamma k^2$ for $k = 1, 3, 5$ yields the closed form in the table. At high SNR, $\gamma \to \infty$ expands each square root as $1 - \frac{1}{2x}$ and gives $\approx 0.497/\gamma$.
+
+</details>
+
+The AWGN reference curves overlaid in the comparison figures are the Part 1 expressions: $\frac{1}{2}\mathrm{erfc}\left(\sqrt{\gamma}\right)$ for BPSK and QPSK, and $\frac{3}{8}\mathrm{erfc}\left(\sqrt{\frac{2}{5}\gamma}\right)$ for 16-QAM.
+
+**Theoretical Rayleigh BER at selected points**
+
+| $E_b/N_0$ | BPSK / QPSK | 16-QAM |
+|:---------:|:-----------:|:------:|
+| 0 dB | $1.46 \times 10^{-1}$ | $1.98 \times 10^{-1}$ |
+| 10 dB | $2.33 \times 10^{-2}$ | $4.24 \times 10^{-2}$ |
+| 20 dB | $2.48 \times 10^{-3}$ | $4.89 \times 10^{-3}$ |
+| 30 dB | $2.50 \times 10^{-4}$ | $4.96 \times 10^{-4}$ |
+
+## Results
+
+**Per-scheme figures:** simulated Rayleigh BER (left) and the same curve against the AWGN reference (right).
+
+| Scheme | Rayleigh BER | Rayleigh vs. AWGN |
+|--------|--------------|-------------------|
+| BPSK | ![BPSK over Rayleigh](part2-fading/results/BER%20Performance%20of%20BPSK%20over%20Rayleigh%20Flat%20Fading%20Channel.jpg) | ![BPSK Rayleigh vs AWGN](part2-fading/results/BPSK%20BER%20Comparison%20Rayleigh%20Flat%20Fading%20vs.%20AWGN%20Channel.jpg) |
+| QPSK | ![QPSK over Rayleigh](part2-fading/results/BER%20Performance%20of%20QPSK%20over%20Rayleigh%20Flat%20Fading%20Channel.jpg) | ![QPSK Rayleigh vs AWGN](part2-fading/results/QPSK%20BER%20Comparison%20Rayleigh%20Flat%20Fading%20vs.%20AWGN%20Channel.jpg) |
+| 16-QAM | ![16-QAM over Rayleigh](part2-fading/results/BER%20Performance%20of%2016-QAM%20over%20Rayleigh%20Flat%20Fading%20Channel.jpg) | ![16-QAM Rayleigh vs AWGN](part2-fading/results/16-QAM%20BER%20Comparison%20Rayleigh%20Flat%20Fading%20vs.%20AWGN%20Channel.jpg) |
+
+**Overall comparison over the Rayleigh channel**
+
+![BPSK, QPSK and 16-QAM over Rayleigh](part2-fading/results/BER%20Comparison%20BPSK%2C%20QPSK%2C%20and%2016-QAM%20over%20Rayleigh%20Channel.jpg)
+
+Running the script produces seven figures:
+
+| # | Figure |
+|---|--------|
+| 1 | BPSK over Rayleigh fading |
+| 2 | BPSK: Rayleigh vs. AWGN |
+| 3 | QPSK over Rayleigh fading |
+| 4 | QPSK: Rayleigh vs. AWGN |
+| 5 | 16-QAM over Rayleigh fading |
+| 6 | 16-QAM: Rayleigh vs. AWGN |
+| 7 | BPSK, QPSK and 16-QAM over Rayleigh fading |
+
+## Key observations
+
+- **Fading is far more costly than noise alone.** To reach a BER of $10^{-3}$, BPSK and QPSK need about 24.0 dB over Rayleigh fading versus 6.8 dB over AWGN, a penalty of roughly 17 dB.
+- **The curves are straight lines with slope $-1$ on the log-log scale.** BER falls only 10 times per 10 dB ($\approx 1/(4\gamma)$), compared with the exponential decay over AWGN. Errors are caused mostly by rare deep fades where $\lvert h \rvert$ is small, not by the average noise level. This is the diversity-order-1 behaviour of a single-antenna flat-fading link.
+- **BPSK and QPSK still coincide** when plotted against $E_b/N_0$: each QPSK axis is an independent BPSK decision at the same energy per bit. The small difference visible near 30 dB is Monte Carlo error (about 250 errors per point at $10^6$ bits).
+- **16-QAM needs about 3 dB more than BPSK/QPSK.** For $10^{-3}$ it needs about 26.9 dB, versus 24.0 dB for BPSK. The two curves are parallel, so the gap is a constant SNR offset rather than a change in slope. Over AWGN the gap is slightly larger, about 3.7 dB (6.8 dB vs. 10.5 dB, using the 16-QAM approximation).
+- **Simulation tracks theory.** Simulated BER agrees with the closed forms above within Monte Carlo error across the whole sweep.
+
+## Known limitations
+
+- **Perfect channel knowledge.** The receiver divides by the exact $h_k$. A practical receiver would need channel estimation, which adds estimation error and pilot overhead.
+- **BER floor and statistical accuracy.** With $10^6$ bits the smallest measurable BER is $10^{-6}$. At 30 dB the BER is about $2.5 \times 10^{-4}$, i.e. roughly 250 errors, so the points near the end of the sweep carry about $\pm 6\%$ (one standard deviation) statistical uncertainty. Increase `N_bits` (keeping it divisible by 4) to tighten them.
+- **Memoryless fading.** $h_k$ is redrawn for every symbol (fast fading with ideal interleaving). Real channels are correlated in time, which changes burst behaviour but not the average BER for coherent detection with known $h$.
 
 ---
 
@@ -202,8 +337,8 @@ Required output: BER vs. SNR for BPSK and 16-QAM, for both channels, with and wi
 
 **Requirements**
 
-- MATLAB R2019b or later
-- Signal Processing Toolbox (`pwelch`, `hamming`)
+- MATLAB R2019b or later (local functions inside scripts are used in Part 2)
+- Signal Processing Toolbox for Part 1 (`pwelch`, `hamming`); Part 2 needs no toolbox
 
 **Run Part 1**
 
@@ -214,38 +349,44 @@ Part_1
 
 The script runs end to end: it generates the data, simulates every scheme across the $E_b/N_0$ sweep, prints the BER table, and opens all nine figures.
 
+**Run Part 2**
+
+```matlab
+cd part2-fading
+part2_ber_analysis
+```
+
+The script simulates BPSK, QPSK and 16-QAM over the Rayleigh channel and opens all seven figures. Export them into `results/` to refresh the images shown above.
+
 **Tuning**
 
-| Variable | Effect |
-|----------|--------|
-| `numBits` | more bits means a lower BER floor and smoother curves, but longer runtime |
-| `EbNo_dB` | change the SNR sweep range or step |
-| `numBits_PSD` | number of bits used for the BFSK Welch PSD |
+| Variable | Script | Effect |
+|----------|--------|--------|
+| `numBits` | Part 1 | more bits means a lower BER floor and smoother curves, but longer runtime |
+| `EbNo_dB` | Part 1 | change the SNR sweep range or step |
+| `numBits_PSD` | Part 1 | number of bits used for the BFSK Welch PSD |
+| `N_bits` | Part 2 | number of bits per SNR point (keep it divisible by 4) |
+| `SNR_dB` | Part 2 | change the SNR sweep range or step |
 
 ## Repository Structure
-
-Suggested layout:
 
 ```
 ber-analysis-awgn-fading-ofdm/
 ├── README.md
 ├── part1-awgn/                    # Single carrier over AWGN
 │   ├── Part_1.m
-│   └── figures/
-├── part2-rayleigh-flat-fading/    # Rayleigh flat fading
-│   └── figures/
+│   └── figures/                   # 9 result figures (.png)
+├── part2-fading/                  # Rayleigh flat fading
+│   ├── part2_ber_analysis.m
+│   └── results/                   # 7 result figures (.jpg)
 ├── part3-ofdm/                    # OFDM
-│   └── figures/
-└── docs/                          # Assignment PDFs, reports
+│   └── ofdm_project_complete.m
+└── docs/                          # Assignment reports
+    ├── Part1_Report.docx
+    ├── Part1_Report.pdf
+    ├── Part3_Report_V3.docx
+    └── Part3_Report_V3.pdf
 ```
-
-## Team
-
-| Part | Owner |
-|------|-------|
-| 1: Single-carrier / AWGN | Mohamed Aboualy ([GitHub](https://github.com/mo-aboualy)) |
-| 2: Rayleigh flat fading | *Teammate name* |
-| 3: OFDM | *Teammate name* |
 
 ## Acknowledgements
 
